@@ -1,0 +1,57 @@
+created:
+    - app/Http/Controllers/UserController.php
+    - app/Http/Controllers/InvestmentController.php
+    - app/Http/Controllers/PurchaseController.php
+    - app/Http/Controllers/InvestorController.php
+    - app/Http/Controllers/SupplierController.php
+    - database/factories/InvestmentFactory.php
+    - database/factories/PurchaseFactory.php
+    - database/factories/InvestorFactory.php
+    - database/factories/SupplierFactory.php
+    - database/migrations/2022_10_31_110301_create_investments_table.php
+    - database/migrations/2022_10_31_110302_create_purchases_table.php
+    - database/migrations/2022_10_31_110303_create_investors_table.php
+    - database/migrations/2022_10_31_110304_create_suppliers_table.php
+    - database/migrations/2022_10_31_110305_create_investor_purchase_table.php
+    - app/Models/Investment.php
+    - app/Models/Purchase.php
+    - app/Models/Investor.php
+    - app/Models/Supplier.php
+    - tests/Feature/Http/Controllers/UserControllerTest.php
+    - tests/Feature/Http/Controllers/InvestmentControllerTest.php
+    - tests/Feature/Http/Controllers/PurchaseControllerTest.php
+    - tests/Feature/Http/Controllers/InvestorControllerTest.php
+    - tests/Feature/Http/Controllers/SupplierControllerTest.php
+    - app/Http/Requests/InvestorStoreRequest.php
+    - app/Http/Requests/InvestorUpdateRequest.php
+    - app/Http/Requests/SupplierStoreRequest.php
+    - app/Http/Requests/SupplierUpdateRequest.php
+    - resources/views/investor/index.blade.php
+    - resources/views/investor/create.blade.php
+    - resources/views/investor/show.blade.php
+    - resources/views/investor/edit.blade.php
+    - resources/views/supplier/index.blade.php
+    - resources/views/supplier/create.blade.php
+    - resources/views/supplier/show.blade.php
+    - resources/views/supplier/edit.blade.php
+updated:
+    - routes/web.php
+skipped:
+    - resources/views/user/index.blade.php
+    - resources/views/user/create.blade.php
+    - resources/views/user/show.blade.php
+    - resources/views/user/edit.blade.php
+    - resources/views/investment/index.blade.php
+    - resources/views/investment/create.blade.php
+    - resources/views/investment/show.blade.php
+    - resources/views/investment/edit.blade.php
+    - resources/views/purchase/index.blade.php
+    - resources/views/purchase/create.blade.php
+    - resources/views/purchase/show.blade.php
+    - resources/views/purchase/edit.blade.php
+models:
+    User: { name: string, email: string, email_verified_at: 'datetime nullable', password: string, remember_token: 'string:100 nullable' }
+    Investment: { filing_date: date, amount: string, cycle: string, investor_id: 'id foreign', relationships: { belongsTo: Investor } }
+    Purchase: { quantity: float, unite_price: float, supplier_id: 'id foreign', relationships: { belongsTo: Supplier, belongsToMany: Investor } }
+    Investor: { name: string, email: string, phone: string, address: string, relationships: { hasMany: Investment, belongsToMany: Purchase } }
+    Supplier: { name: string, email: string, phone: string, address: string, relationships: { hasOne: Purchase } }
